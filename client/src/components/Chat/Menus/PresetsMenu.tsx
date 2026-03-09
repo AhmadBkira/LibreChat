@@ -19,7 +19,7 @@ import { useChatContext } from '~/Providers';
 const PresetsMenu: FC = () => {
   const { user } = useAuthContext();
 
-  if (!user || user.role !== 'admin') {
+  if (!user || user.role !== 'ADMIN') {
     return null;
   }
 

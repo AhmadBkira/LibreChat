@@ -23,7 +23,7 @@ interface ToolsDropdownProps {
 
 const ToolsDropdown = ({ disabled }: ToolsDropdownProps) => {
   const { user } = useAuthContext();
-  if (!user || user.role !== 'admin') {
+  if (!user || user.role !== 'ADMIN') {
     return null;
   }
 

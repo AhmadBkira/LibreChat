@@ -10,7 +10,7 @@ import {
   PermissionTypes,
   defaultAgentCapabilities,
 } from 'librechat-data-provider';
-import { useLocalize, useHasAccess, useAgentCapabilities } from '~/hooks';
+import { useLocalize, useHasAccess, useAgentCapabilities, useAuthContext } from '~/hooks';
 import ArtifactsSubMenu from '~/components/Chat/Input/ArtifactsSubMenu';
 import MCPSubMenu from '~/components/Chat/Input/MCPSubMenu';
 import { useGetStartupConfig } from '~/data-provider';
@@ -22,6 +22,11 @@ interface ToolsDropdownProps {
 }
 
 const ToolsDropdown = ({ disabled }: ToolsDropdownProps) => {
+  const { user } = useAuthContext();
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
+
   const localize = useLocalize();
   const isDisabled = disabled ?? false;
   const [isPopoverActive, setIsPopoverActive] = useState(false);

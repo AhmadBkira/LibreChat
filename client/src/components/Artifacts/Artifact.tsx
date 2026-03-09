@@ -9,6 +9,9 @@ import { useMessageContext, useArtifactContext } from '~/Providers';
 import { logger, extractContent, isArtifactRoute } from '~/utils';
 import { artifactsState } from '~/store/artifacts';
 import ArtifactButton from './ArtifactButton';
+import { useHasAccess } from '~/hooks';
+import { PermissionTypes, Permissions } from 'librechat-data-provider';
+
 
 export const artifactPlugin: Pluggable = () => {
   return (tree) => {
@@ -53,6 +56,12 @@ export function Artifact({
 
   const setArtifacts = useSetRecoilState(artifactsState);
   const [artifact, setArtifact] = useState<Artifact | null>(null);
+
+  // 🔹 admin permission check
+  const isAdmin = useHasAccess({
+    permissionType: PermissionTypes.ADMIN,
+    permission: Permissions.USE,
+  });
 
   const throttledUpdateRef = useRef(
     throttle((updateFn: () => void) => {
@@ -123,6 +132,11 @@ export function Artifact({
     resetCounter();
     updateArtifact();
   }, [updateArtifact, resetCounter]);
+
+  // 🔹 hide artifacts for non-admin users
+  if (!isAdmin) {
+    return null;
+  }
 
   return <ArtifactButton artifact={artifact} />;
 }

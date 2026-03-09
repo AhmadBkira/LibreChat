@@ -5,8 +5,15 @@ import type { TConversation } from 'librechat-data-provider';
 import { useChatContext, useAddedChatContext } from '~/Providers';
 import { mainTextareaId } from '~/common';
 import { useLocalize } from '~/hooks';
+import { useAuthContext } from '~/hooks/AuthContext';
 
 function AddMultiConvo() {
+  const { user } = useAuthContext();
+
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
+
   const { conversation } = useChatContext();
   const { setConversation: setAddedConvo } = useAddedChatContext();
   const localize = useLocalize();

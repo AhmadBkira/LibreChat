@@ -2926,3 +2926,118 @@ html {
 .sharepoint-picker-bg {
   background-color: #f5f5f5;
 }
+
+
+/* ===================================================== */
+/* TH Köln Theme Override                                */
+/* ===================================================== */
+
+:root {
+  --th-red: #cf1820;
+  --th-orange: #ec6525;
+  --th-violet: #af368c;
+
+  /* Main UI accents */
+  --surface-submit: var(--th-red);
+  --surface-submit-hover: var(--th-orange);
+}
+
+/* Primary buttons */
+.btn-primary {
+  background-color: var(--th-red) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--th-orange) !important;
+}
+
+/* Secondary buttons */
+.btn-secondary {
+  background-color: var(--th-violet) !important;
+  color: white !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--th-red) !important;
+}
+
+/* Links */
+.prose {
+  --tw-prose-links: var(--th-red);
+}
+
+/* Focus rings */
+:focus-visible {
+  outline: 2px solid var(--th-violet);
+}
+
+/* Selected items / hover elements */
+.select-item[data-active-item] {
+  background-color: var(--th-orange);
+  color: white;
+}
+
+/* Scroll button */
+.premium-scroll-button:hover {
+  box-shadow:
+    0 5px 10px rgba(207, 24, 32, 0.2),
+    0 7px 14px rgba(207, 24, 32, 0.3);
+}
+
+/* Creative tab gradient */
+.creative-tab {
+  background: linear-gradient(
+    90deg,
+    var(--th-violet) 0%,
+    var(--th-red) 100%
+  ) !important;
+}
+
+/* Balanced tab */
+.balanced-tab {
+  background: linear-gradient(
+    90deg,
+    var(--th-orange) 0%,
+    var(--th-red) 100%
+  ) !important;
+}
+
+/* Fast tab */
+.fast-tab {
+  background: linear-gradient(
+    90deg,
+    var(--th-red) 0%,
+    var(--th-violet) 100%
+  ) !important;
+}
+
+/* Precise tab */
+.precise-tab {
+  background: linear-gradient(
+    90deg,
+    var(--th-violet) 0%,
+    var(--th-orange) 100%
+  ) !important;
+}
+
+/* Hover surfaces */
+.select-item:hover {
+  background-color: rgba(207, 24, 32, 0.08);
+}
+
+/* Tooltip accent */
+.tooltip {
+  border-left: 3px solid var(--th-red);
+}
+
+/* Markdown links */
+.markdown a {
+  color: var(--th-red);
+}
+
+/* Badge hover */
+.badge-icon:hover {
+  transform: scale(1.1);
+  color: var(--th-orange);
+}

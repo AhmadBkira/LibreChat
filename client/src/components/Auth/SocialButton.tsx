@@ -1,7 +1,14 @@
 import React from 'react';
+import { useHasAccess } from '~/hooks';
+import { PermissionTypes, Permissions } from 'librechat-data-provider';
 
 const SocialButton = ({ id, enabled, serverDomain, oauthPath, Icon, label }) => {
-  if (!enabled) {
+  const isAdmin = useHasAccess({
+    permissionType: PermissionTypes.ADMIN,
+    permission: Permissions.USE,
+  });
+
+  if (!enabled || !isAdmin) {
     return null;
   }
 

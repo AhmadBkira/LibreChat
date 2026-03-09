@@ -13,9 +13,16 @@ import {
 import type { FC } from 'react';
 import { EditPresetDialog, PresetItems } from './Presets';
 import { useLocalize, usePresets } from '~/hooks';
+import { useAuthContext } from '~/hooks/AuthContext';
 import { useChatContext } from '~/Providers';
 
 const PresetsMenu: FC = () => {
+  const { user } = useAuthContext();
+
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
+
   const localize = useLocalize();
   const presetsMenuTriggerRef = useRef<HTMLDivElement>(null);
   const {

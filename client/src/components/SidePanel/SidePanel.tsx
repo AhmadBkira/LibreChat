@@ -6,6 +6,7 @@ import type { TEndpointsConfig, TInterfaceConfig } from 'librechat-data-provider
 import type { ImperativePanelHandle } from 'react-resizable-panels';
 import useSideNavLinks from '~/hooks/Nav/useSideNavLinks';
 import { useLocalStorage, useLocalize } from '~/hooks';
+import { useAuthContext } from '~/hooks/AuthContext';
 import { useGetEndpointsQuery } from '~/data-provider';
 import NavToggle from '~/components/Nav/NavToggle';
 import { useSidePanelContext } from '~/Providers';
@@ -44,6 +45,12 @@ const SidePanel = ({
   interfaceConfig: TInterfaceConfig;
 }) => {
   const localize = useLocalize();
+  const { user } = useAuthContext();
+
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
+
   const { endpoint } = useSidePanelContext();
   const [isHovering, setIsHovering] = useState(false);
   const [newUser, setNewUser] = useLocalStorage('newUser', true);

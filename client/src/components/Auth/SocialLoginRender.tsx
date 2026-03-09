@@ -11,6 +11,8 @@ import {
 import SocialButton from './SocialButton';
 
 import { useLocalize } from '~/hooks';
+import { useHasAccess } from '~/hooks';
+import { PermissionTypes, Permissions } from 'librechat-data-provider';
 
 import { TStartupConfig } from 'librechat-data-provider';
 
@@ -21,7 +23,12 @@ function SocialLoginRender({
 }) {
   const localize = useLocalize();
 
-  if (!startupConfig) {
+  const isAdmin = useHasAccess({
+    permissionType: PermissionTypes.ADMIN,
+    permission: Permissions.USE,
+  });
+
+  if (!startupConfig || !isAdmin) {
     return null;
   }
 
